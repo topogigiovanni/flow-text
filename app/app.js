@@ -17,8 +17,40 @@ var appDir = jetpack.cwd(app.getAppPath());
 // here files like it is node.js! Welcome to Electron world :)
 console.log('The author of this app is:', appDir.read('package.json', 'json').author);
 
+//https://regex101.com/
+
+var helper = {
+	buildMenuItem: function(){
+		
+	}
+};
+
+var matchList = [
+	{
+		regex: /-{5,}/,
+		action: 'buildMenuItem'
+	}
+];
+
+function onTextChange(e){
+	if(e.keyCode == 13){
+		var txt = this.value;
+		console.log('txt', txt, this, e);
+		matchList.forEach(function(match){
+			//var m = metch.regex.exec(txt);
+			var m = txt.split(match.regex);
+			console.log('m', m);
+		});
+	}
+	
+};
+
+
 document.addEventListener('DOMContentLoaded', function () {
     // document.getElementById('greet').innerHTML = greet();
     // document.getElementById('platform-info').innerHTML = os.platform();
     // document.getElementById('env-name').innerHTML = env.name;
+	
+	document.getElementById('text').addEventListener("keyup", onTextChange);
+	
 });
